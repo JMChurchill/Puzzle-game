@@ -1,0 +1,7 @@
+.content-box {
+  /* background-image: url("../Assets/maps.jpg"); */
+  background-size: 100%;
+  aspect-ratio: 16/9;
+  width: 50%;
+  border: 2px solid black;
+}
