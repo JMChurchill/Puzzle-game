@@ -1,3 +1,33 @@
+.parent {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 1em;
+  font-family: sans-serif;
+  font-weight: bold;
+  border: 2px solid #dfa612;
+  color: black;
+}
+/* .origin {
+  flex-basis: 100%;
+  flex-grow: 1;
+  padding: 10px;
+} */
+.draggable {
+  background-color: #4aae9b;
+  font-weight: normal;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.drop-zone {
+  background-color: #6db65b;
+  border: black solid 1px;
+  min-height: 100px;
+  flex-basis: 100%;
+  flex-grow: 1;
+  padding: 10px;
+}
+
 .content-box {
   /* background-image: url("../Assets/maps.jpg"); */
   background-size: 100%;

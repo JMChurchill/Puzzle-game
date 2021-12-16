@@ -1,4 +1,24 @@
-console.log("linked");
+// console.log("linked");
+
+function onDragStart(event) {
+  event.dataTransfer.setData("text/plain", event.target.id);
+  event.currentTarget.style.backgroundColor = "yellow";
+}
+
+function onDragOver(event) {
+  event.preventDefault();
+}
+
+function onDrop(event) {
+  const id = event.dataTransfer.getData("text");
+  const draggableElement = document.getElementById(id);
+  const dropzone = event.target;
+  dropzone.appendChild(draggableElement);
+  event.dataTransfer.clearData();
+}
+function onDragEnd(event) {
+  event.currentTarget.style.backgroundColor = "#4AAE9B";
+}
 
 const contentBox = document.querySelector(".content-box");
 const contentBoxWidth = contentBox.clientWidth;
@@ -67,7 +87,7 @@ function cutImage() {
   imagePieces.forEach((im) => {
     var slicedImage = document.createElement("img");
     slicedImage.src = im;
-    slicedImage.id = `img${i}`;
+    slicedImage.className = `img${i}`;
     var div = document.getElementById("test");
     div.appendChild(slicedImage);
     i++;
@@ -78,10 +98,12 @@ function cutImage() {
   // load one piece onto the page
   var anImageElement = document.querySelector(".content-box");
   anImageElement.src = imagePieces[0];
-  //   console.log(imagePieces[0]);
+  console.log(anImageElement);
 
   anImageElement.src = imagePieces[1];
-  //   console.log(imagePieces[1]);
+  console.log(imagePieces[1]);
+
+  // ctx.drawImage(imagePieces[1], 0, 0);
 
   //   // for test div
   //   var slicedImage = document.createElement("img");
@@ -98,9 +120,15 @@ img.src = "../assets/maps.jpg";
 //   imagePieces = [],
 
 var canvas2 = document.getElementById("canvas");
+const temp = document.getElementById("source");
+console.log(temp);
 var ctx2 = canvas2.getContext("2d");
+// ctx2.drawImage('temp', 40, 20, 500, 200);
+temp.addEventListener("load", (e) => {
+  console.log("loaded");
+  // ctx.drawImage(temp, 0, 0);
+});
 // ctx2.fillStyle = "red";
 // ctx2.fillRect(40, 20, 300, 100);
 // immm = document.getElementById("img1");
-console.log(imagePieces[1]);
-ctx2.drawImage(imagePieces[1], 1, 2, 100, 200);
+// console.log(imagePieces[1]);
