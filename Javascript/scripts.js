@@ -12,6 +12,7 @@ function onDragOver(event) {
 function onDrop(event) {
   const id = event.dataTransfer.getData("text");
   const draggableElement = document.getElementById(id);
+  console.log(draggableElement.id);
   const dropzone = event.target;
   dropzone.appendChild(draggableElement);
   event.dataTransfer.clearData();
