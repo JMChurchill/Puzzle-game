@@ -1,7 +1,12 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
 .parent {
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 1em;
+  padding: 1em 2em;
   font-family: sans-serif;
   font-weight: bold;
   border: 2px solid #dfa612;

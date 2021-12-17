@@ -1,5 +1,33 @@
 // console.log("linked");
 
+function checkPositions() {
+  var dropzones = document.getElementsByClassName("drop-zone");
+  correct = true;
+  console.log(dropzones);
+  Array.from(dropzones).map((zone) => {
+    // console.log("zone");
+    // console.log(zone);
+    var zoneNum = zone.id.replace(/^\D+/g, "");
+    console.log(zoneNum);
+    var child = zone.querySelector(".draggable");
+    // console.log("child");
+    // console.log(child.id);
+    // console.log(zone.childNodes[1].id);
+    var dragNum = child.id.replace(/^\D+/g, "");
+    console.log(dragNum);
+    if (dragNum === zoneNum) {
+      document.getElementById(zone.id).style.border = "solid 4px green";
+    } else {
+      correct = false;
+      document.getElementById(zone.id).style.border = "solid 4px red";
+    }
+  });
+  if (correct) {
+    alert("Correct!");
+  } else {
+    alert("Incorrect");
+  }
+}
 function onDragStart(event) {
   event.dataTransfer.setData("text/plain", event.target.id);
   event.currentTarget.style.backgroundColor = "yellow";
