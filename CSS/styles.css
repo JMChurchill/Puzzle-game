@@ -17,20 +17,20 @@ body {
   flex-grow: 1;
   padding: 10px;
 } */
-.draggable {
+/* .draggable {
   background-color: #4aae9b;
   font-weight: normal;
   margin-bottom: 10px;
   margin-top: 10px;
   padding: 10px;
-}
+} */
 .drop-zone {
   background-color: #6db65b;
   border: black solid 1px;
   min-height: 100px;
   flex-basis: 100%;
   flex-grow: 1;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .content-box {
@@ -39,4 +39,10 @@ body {
   aspect-ratio: 16/9;
   width: 50%;
   border: 2px solid black;
+}
+img {
+  width: 100%;
+}
+canvas {
+  width: 50%;
 }
