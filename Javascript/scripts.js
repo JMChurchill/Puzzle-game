@@ -1,9 +1,3 @@
-// console.log("linked");
-// drag and drop resources:
-// https://web.dev/drag-and-drop/
-// https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
-// http://jsfiddle.net/YCa3S/23 <- drag and drop on dynamically created element
-
 const imageUrl = "../assets/maps.jpg";
 
 const outputImage = document.createElement("canvas");
@@ -118,17 +112,15 @@ inputImage.onload = () => {
     document.getElementById("puzzle").appendChild(dropzone);
     const dropZones = document.getElementsByClassName("drop-zone");
     for (let j = 0; j < dropZones.length; j++) {
-      dropZones[j].style.minHeight = pieceHeight + "px";
+      // dropZones[j].style.minHeight = pieceHeight + "px";
     }
   });
   // create images and assign to a random dropzone
   imagePieces.forEach((im, i) => {
     function drag(ev) {
-      console.log(ev);
       dragSrcEl = image;
       ev.dataTransfer.effectAllowed = "move";
       ev.dataTransfer.setData("Text/plain", ev.target.id);
-      console.log(ev.dataTransfer.getData("text"));
     }
     j = numberedArray[i];
     const dropzone = document.getElementById(`drop${j}`);
