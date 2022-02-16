@@ -6,11 +6,6 @@
 
 const imageUrl = "../assets/maps.jpg";
 
-// const outputImageAspectRatio = 1;
-
-// const inputImage = new Image();
-// imagePieces = [];
-
 const outputImage = document.createElement("canvas");
 (imagePieces = []), (inputImage = new Image());
 
@@ -26,7 +21,6 @@ inputImage.onload = () => {
   const pieceWidth = inputWidth / numCols;
   const pieceHeight = inputHeight / numRows;
 
-  // const outputImage = document.createElement("canvas");
   const ctx = outputImage.getContext("2d");
 
   for (var y = 0; y < numCols; ++y) {
@@ -49,7 +43,7 @@ inputImage.onload = () => {
     }
   }
   // generate correct rows and columns for image
-  const container = document.getElementById("test");
+  const container = document.getElementById("puzzle");
   container.style.display = "grid";
   // make number of columns and rows string
   let numberCols = "";
@@ -63,17 +57,10 @@ inputImage.onload = () => {
   container.style.gridTemplateColumns = numberCols;
   container.style.gridTemplateRows = numberRows;
 
-  // for (let i = 0; i < imagePieces.length; i++) {
-  //   const im = imagePieces[i];
-
-  // }
-
   // fill array with values 1 - number of image pieces
   var numberedArray = Array.from(Array(imagePieces.length).keys());
-  // console.log(numberedArray);
-  // randomise order
+  // randomize order
   numberedArray.sort(() => Math.random() - 0.5);
-  // console.log(numberedArray);
 
   imagePieces.forEach((im, i) => {
     //create dropzone
@@ -88,35 +75,58 @@ inputImage.onload = () => {
       false
     );
     dropzone.addEventListener(
+      "dragenter",
+      (ev) => {
+        // ev.preventDefault();
+        dropzone.classList.add("over");
+      },
+      false
+    );
+    dropzone.addEventListener(
+      "dragleave",
+      (ev) => {
+        // ev.preventDefault();
+        dropzone.classList.remove("over");
+      },
+      false
+    );
+    dropzone.addEventListener(
+      "dragend",
+      (ev) => {
+        // ev.preventDefault();
+        dropzone.classList.remove("over");
+      },
+      false
+    );
+
+    dropzone.addEventListener(
       "drop",
       (ev) => {
         ev.preventDefault();
+        //get source element
+        sourceZone = document.getElementById(
+          ev.dataTransfer.getData("text")
+        ).parentNode;
+        // switch orignal img with moved image
+        sourceZone.appendChild(ev.srcElement.parentNode.childNodes[0]);
         dropzone.appendChild(
           document.getElementById(ev.dataTransfer.getData("text"))
         );
       },
       false
     );
-    document.getElementById("test").appendChild(dropzone);
+    document.getElementById("puzzle").appendChild(dropzone);
     const dropZones = document.getElementsByClassName("drop-zone");
-    // console.log(dropZones);
     for (let j = 0; j < dropZones.length; j++) {
       dropZones[j].style.minHeight = pieceHeight + "px";
     }
-
-    // //create image
-    // const image = document.createElement("img");
-    // image.src = im;
-    // image.id = "img" + i;
-    // // add image to div
-    // dropzone.appendChild(image);
-    // image.onload = (e) => {
-    //   this.addEventListener("dragstart", drag, false);
-    // };
   });
   // create images and assign to a random dropzone
   imagePieces.forEach((im, i) => {
     function drag(ev) {
+      console.log(ev);
+      dragSrcEl = image;
+      ev.dataTransfer.effectAllowed = "move";
       ev.dataTransfer.setData("Text/plain", ev.target.id);
       console.log(ev.dataTransfer.getData("text"));
     }
@@ -140,17 +150,9 @@ inputImage.src = imageUrl;
 function checkPositions() {
   var dropzones = document.getElementsByClassName("drop-zone");
   correct = true;
-  // console.log(dropzones);
   Array.from(dropzones).map((zone) => {
-    // console.log("zone");
-    // console.log(zone);
     var zoneNum = zone.id.replace(/^\D+/g, "");
-    // console.log(zoneNum);
     var child = zone.querySelector(".draggable");
-    // var child = zone.querySelector(".img");
-    // console.log("child");
-    // console.log(child.id);
-    // console.log(zone.childNodes[1].id);
     var dragNum = child.id.replace(/^\D+/g, "");
     if (dragNum === zoneNum) {
       document.getElementById(zone.id).style.border = "solid 4px green";
@@ -165,23 +167,3 @@ function checkPositions() {
     alert("Incorrect");
   }
 }
-// function onDragStart(event) {
-//   event.dataTransfer.setData("text/plain", event.target.id);
-//   event.currentTarget.style.backgroundColor = "yellow";
-// }
-
-// function onDragOver(event) {
-//   event.preventDefault();
-// }
-
-// function onDrop(event) {
-//   const id = event.dataTransfer.getData("text");
-//   const draggableElement = document.getElementById(id);
-//   console.log(draggableElement.id);
-//   const dropzone = event.target;
-//   dropzone.appendChild(draggableElement);
-//   event.dataTransfer.clearData();
-// }
-// function onDragEnd(event) {
-//   event.currentTarget.style.backgroundColor = "#4AAE9B";
-// }

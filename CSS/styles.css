@@ -46,3 +46,7 @@ img {
 canvas {
   width: 50%;
 }
+
+.over {
+  border: 3px dotted #666;
+}
